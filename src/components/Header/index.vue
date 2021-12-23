@@ -29,7 +29,7 @@
 				</el-col>
 			</el-row>
 		</div>
-		<div class="header-mini hidden-lg-and-up">
+		<div class="header-mini version-heart hidden-lg-and-up">
 			<el-image
 				src="https://upyun.xuanmo.xin/images/x-logo.png"
 				style="width: 120px; height: 40px"
@@ -86,7 +86,6 @@ header {
 .header-mini {
 	height: 60px;
 	display: flex;
-	padding: 0 10px;
 	align-items: center;
 	justify-content: space-between;
 }
