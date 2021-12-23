@@ -1,6 +1,6 @@
 <template>
 	<HeaderComponent />
-	<div class="page-main">
+	<div class="page-main version-heart">
 		<router-view />
 	</div>
 	<FooterComponent />
