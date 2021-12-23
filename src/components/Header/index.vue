@@ -78,6 +78,7 @@ export default defineComponent({
 <style scoped>
 header {
 	margin-bottom: 15px;
+	background-color: #ffffff;
 	box-shadow: rgba(0, 0, 0, 0.1) 0 2px 12px 0;
 }
 .menu-nav {
