@@ -64,7 +64,7 @@ footer {
 	align-items: center;
 	margin-bottom: 20px;
 	padding-bottom: 20px;
-	border-bottom: solid 1px #3b424a;
+	border-bottom: solid 1px #dcdfe6;
 }
 .friendship-nav a {
 	padding: 0 10px;
