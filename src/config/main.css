@@ -1,12 +1,26 @@
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background-color: #e4e4e4;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #409eff;
+}
+
 body {
     margin: 0;
 }
+
 .version-heart {
     width: 1200px;
     margin: 0 auto;
 }
+
 @media (max-width: 1200px) {
     .version-heart {
         width: 95%;
     }
 }
+
