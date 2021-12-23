@@ -1,0 +1,9 @@
+{
+	"printWidth": 120,
+	"eslintIntegration": true,
+	"semi": false,
+	"useTabs": true,
+	"tabWidth": 4,
+	"bracketSpacing": false,
+	"arrowParens": "always"
+}
