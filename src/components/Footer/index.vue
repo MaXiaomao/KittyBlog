@@ -55,6 +55,7 @@ export default defineComponent({
 <style scoped>
 footer {
 	padding: 30px 0;
+	margin-top: 15px;
 	background-color: #2d3237;
 }
 .friendship-nav {

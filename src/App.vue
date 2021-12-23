@@ -1,6 +1,8 @@
 <template>
 	<HeaderComponent />
-	<router-view />
+	<div class="page-main">
+		<router-view />
+	</div>
 	<FooterComponent />
 </template>
 
@@ -15,3 +17,9 @@ export default defineComponent({
 	setup() {},
 })
 </script>
+
+<style>
+.page-main {
+	min-height: calc(100vh - 288px);
+}
+</style>

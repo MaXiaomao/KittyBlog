@@ -1,12 +1,12 @@
-body{
+body {
     margin: 0;
 }
-.version-heart{
+.version-heart {
     width: 1200px;
     margin: 0 auto;
 }
 @media (max-width: 1200px) {
-    .version-heart{
+    .version-heart {
         width: 95%;
     }
 }
