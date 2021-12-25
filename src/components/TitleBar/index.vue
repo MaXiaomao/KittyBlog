@@ -19,20 +19,19 @@ export default defineComponent({
 
 <style scoped>
 .title-bar {
-	height: 40px;
+	height: 30px;
 	display: flex;
-	align-items: center;
 	margin-bottom: 15px;
+	align-items: flex-start;
 	justify-content: space-between;
 	border-bottom: solid 1px #dcdfe6;
 }
 .title-bar .title-text {
-	height: 100%;
 	display: flex;
 	color: #606266;
 	padding: 0 10px;
-	align-items: center;
-	margin-bottom: -1px;
+	align-items: flex-start;
+	height: calc(100% + 1px);
 	border-bottom: solid 2px #409eff;
 }
 .title-bar span {
