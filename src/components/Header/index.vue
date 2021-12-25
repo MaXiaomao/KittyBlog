@@ -79,7 +79,7 @@ export default defineComponent({
 header {
 	margin-bottom: 15px;
 	background-color: #ffffff;
-	box-shadow: rgba(0, 0, 0, 0.1) 0 2px 12px 0;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
 }
 .menu-nav {
 	border-right: none;
