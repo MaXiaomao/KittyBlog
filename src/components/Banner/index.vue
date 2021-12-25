@@ -47,7 +47,7 @@ export default defineComponent({
 <style scoped>
 .banner {
 	display: grid;
-	grid-gap: 10px;
+	grid-gap: 15px;
 	grid-auto-flow: row;
 	grid-template-columns: 710px 180px;
 	grid-template-rows: 110px 110px 110px;
@@ -77,5 +77,16 @@ export default defineComponent({
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	background-color: rgba(0, 0, 0, 0.3);
+}
+@media (max-width: 1200px) {
+	.banner {
+		grid-gap: 8px;
+		grid-template-rows: 90px 90px 90px;
+		grid-template-columns: repeat(3, 32%);
+	}
+	.banner-main {
+		grid-row-end: 3;
+		grid-column-end: 4;
+	}
 }
 </style>
