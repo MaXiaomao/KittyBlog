@@ -22,7 +22,7 @@ export default defineComponent({
 	height: 40px;
 	display: flex;
 	align-items: center;
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 	justify-content: space-between;
 	border-bottom: solid 1px #dcdfe6;
 }
