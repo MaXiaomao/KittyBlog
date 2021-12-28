@@ -46,7 +46,7 @@ import {ChatLineSquare} from "@element-plus/icons-vue"
 import TitleBarComponent from "../TitleBar/index.vue"
 
 export default defineComponent({
-	name: "CommentComponent",
+	name: "NewCommentComponent",
 	components: {TitleBarComponent, ChatLineSquare},
 	setup() {},
 })
