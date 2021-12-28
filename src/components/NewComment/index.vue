@@ -1,5 +1,5 @@
 <template>
-	<div class="comment">
+	<div class="new-comment">
 		<title-bar-component name="最新评论">
 			<template #icon>
 				<el-icon><chat-line-square /></el-icon>
@@ -53,7 +53,7 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.comment {
+.new-comment {
 	padding: 15px;
 	border-radius: 4px;
 	background-color: #ffffff;

@@ -21,7 +21,7 @@ import {defineComponent} from "vue"
 import TitleBarComponent from "../../components/TitleBar/index.vue"
 import ArticleItemComponent from "../../components/ArticleItem/index.vue"
 import BulletinComponent from "../../components/Bulletin/index.vue"
-import CommentComponent from "../../components/Comment/index.vue"
+import CommentComponent from "../../components/NewComment/index.vue"
 import SiteCountComponent from "../../components/SiteCount/index.vue"
 import LabelComponent from "../../components/Label/index.vue"
 
