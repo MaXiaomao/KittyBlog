@@ -47,6 +47,7 @@ export default defineComponent({
 }
 .grid-left {
 	padding: 15px;
+	border-radius: 4px;
 	background-color: #ffffff;
 }
 .m-pagination {
@@ -54,5 +55,11 @@ export default defineComponent({
 }
 .margin-bot {
 	margin-bottom: 15px;
+}
+@media (max-width: 1200px) {
+	.page-main {
+		grid-gap: 0;
+		grid-template-columns: 100%;
+	}
 }
 </style>
