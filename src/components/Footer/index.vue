@@ -14,17 +14,17 @@
 			<div class="page-nav">
 				<em>首页</em>
 				<i>|</i>
-				<em>联系站长</em>
+				<em>web前端</em>
 				<i>|</i>
-				<em>我的开源</em>
+				<em>后端</em>
 				<i>|</i>
-				<em>留言板</em>
+				<em>服务器</em>
 				<i>|</i>
-				<em>友链申请</em>
+				<em>实战案例</em>
 				<i>|</i>
-				<em>友情链接</em>
+				<em>关于博主</em>
 				<i>|</i>
-				<em>站点地图</em>
+				<em>生活随笔</em>
 			</div>
 			<div class="site-info">
 				<p>
@@ -59,7 +59,7 @@ footer {
 	background-color: #2d3237;
 }
 .friendship-nav {
-	display: flex;
+	display: none; /*display: flex;*/
 	flex-wrap: wrap;
 	align-items: center;
 	margin-bottom: 20px;
@@ -73,6 +73,7 @@ footer {
 .page-nav {
 	color: #c0c4cc;
 	font-size: 14px;
+	margin-bottom: 15px;
 }
 .page-nav em {
 	cursor: pointer;
@@ -92,6 +93,9 @@ footer {
 	line-height: 22px;
 	align-items: center;
 	justify-content: space-between;
+}
+.site-info p {
+	margin: 0;
 }
 a {
 	color: #c0c4cc;
