@@ -16,6 +16,11 @@ const routes: Array<RouteRecordRaw> = [
 		name: "ArticleContent",
 		component: () => import("../pages/ArticleContent/index.vue"),
 	},
+	{
+		path: "/LabelAll",
+		name: "LabelAll",
+		component: () => import("../pages/LabelAll/index.vue"),
+	},
 ]
 
 const router = createRouter({
