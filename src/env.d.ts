@@ -9,3 +9,4 @@ declare module "*.vue" {
 
 declare module "marked"
 declare module "prismjs"
+declare module "pubsub-js"

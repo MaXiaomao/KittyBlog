@@ -11,6 +11,7 @@
 		"element-plus": "^1.2.0-beta.6",
 		"marked": "^4.0.8",
 		"prismjs": "^1.25.0",
+		"pubsub-js": "^1.9.4",
 		"vue": "^3.2.16",
 		"vue-router": "4.0.12"
 	},
