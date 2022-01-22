@@ -1,12 +1,7 @@
 <template>
 	<div class="article-item">
 		<div class="item-image">
-			<el-image
-				class="m-image"
-				v-if="img_url !== null"
-				:src="`http://127.0.0.1:8080/${img_url}`"
-				fit="cover"
-			></el-image>
+			<el-image class="m-image" v-if="img_url !== null" :src="`/upload${img_url}`" fit="cover"></el-image>
 		</div>
 		<div class="item-info">
 			<div class="item-top">
