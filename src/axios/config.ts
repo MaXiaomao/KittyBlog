@@ -27,7 +27,6 @@ const AxiosDoll = function (method: Method, url: string, params = {}): AxiosProm
 	const config: AxiosRequestConfig = {
 		method,
 		url,
-		baseURL: "http://127.0.0.1:7001",
 		...params,
 	}
 	return Axios(config)
