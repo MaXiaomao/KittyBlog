@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref, onBeforeMount} from "vue"
+import {defineComponent, ref, onBeforeMount, Ref} from "vue"
 import {Router, useRouter} from "vue-router"
 import {CollectionTag} from "@element-plus/icons-vue"
 import TitleBarComponent from "../TitleBar/index.vue"
@@ -38,7 +38,7 @@ export default defineComponent({
 	setup() {
 		const router: Router = useRouter()
 		const tagType: string[] = ["success", "info", "warning", "danger"]
-		const labelData = ref([])
+		const labelData: Ref = ref([])
 
 		const tagClick = (id: number, name: string) => {
 			router.push({

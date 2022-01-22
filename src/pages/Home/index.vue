@@ -58,7 +58,13 @@ export default defineComponent({
 	setup() {
 		const articleTotal: Ref = ref(0)
 		const articleData: Ref = ref([])
-		const articleParams: GetArticleRule = reactive({classify: null, title: null, page: 1, pageSize: 10})
+		const articleParams: GetArticleRule = reactive({
+			classify: null,
+			title: null,
+			label: null,
+			page: 1,
+			pageSize: 10,
+		})
 
 		const articleGet = () => {
 			getArticle(articleParams).then((res) => {
