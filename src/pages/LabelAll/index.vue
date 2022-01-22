@@ -6,47 +6,52 @@
 			</template>
 		</title-bar-component>
 		<div class="content">
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" effect="dark"> 前端笔记 </el-tag>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" effect="dark"> 前端笔记 </el-tag>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" effect="dark"> 前端笔记 </el-tag>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" effect="dark"> 前端笔记 </el-tag>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" effect="dark"> 前端笔记 </el-tag>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" effect="dark"> 前端笔记 </el-tag>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" effect="dark"> 前端笔记 </el-tag>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" effect="dark"> 前端笔记 </el-tag>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" effect="dark"> 前端笔记 </el-tag>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" effect="dark"> 前端笔记 </el-tag>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" effect="dark"> 前端笔记 </el-tag>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" effect="dark"> 前端笔记 </el-tag>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" effect="dark"> 前端笔记 </el-tag>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" effect="dark"> 前端笔记 </el-tag>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" effect="dark"> 前端笔记 </el-tag>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" effect="dark"> 前端笔记 </el-tag>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" effect="dark"> 前端笔记 </el-tag>
-			<el-tag class="m-tag" @click="tagClick('前端')" :type="tagType[randomNumber(0, 4)]" effect="dark">
-				前端笔记
+			<el-tag
+				class="m-tag"
+				v-for="v in labelData"
+				@click="tagClick(v.id, v.name)"
+				:type="tagType[randomNumber(0, 4)]"
+				effect="dark"
+				:key="v.id"
+			>
+				{{ v.name }}
 			</el-tag>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue"
+import {defineComponent, onBeforeMount, Ref, ref} from "vue"
+import {Router, useRouter} from "vue-router"
 import {CollectionTag} from "@element-plus/icons-vue"
 import TitleBarComponent from "../../components/TitleBar/index.vue"
-import {randomNumber} from "../../config/plugIn/index.ts"
+import {randomNumber} from "../../config/plugIn"
+import {getLabel} from "../../axios"
 
 export default defineComponent({
 	name: "LabelAllComponent",
 	components: {TitleBarComponent, CollectionTag},
 	setup() {
+		const router: Router = useRouter()
 		const tagType: string[] = ["success", "info", "warning", "danger"]
+		const labelData: Ref = ref([])
 
-		const tagClick = (value: string) => {
-			console.log(value)
+		const tagClick = (id: number, name: string) => {
+			router.push({
+				path: "/ArticleList",
+				query: {
+					label: id,
+					name,
+				},
+			})
 		}
 
-		return {tagType, randomNumber, tagClick}
+		onBeforeMount(() => {
+			getLabel({size: null}).then((res) => {
+				labelData.value = res.data.data
+			})
+		})
+		return {tagType, labelData, randomNumber, tagClick}
 	},
 })
 </script>

@@ -1,9 +1,9 @@
 <template>
 	<div class="page-main version-heart">
-		<article-component />
+		<article-component v-bind="bodyData" />
 		<self-info-component class="margin-bot" />
 		<div class="comment">
-			<p class="title">共 5 条评论关于 “在Nuxtjs中使用@nuxtjs/axios与vuex的一些心得”</p>
+			<p class="title">共 0 条评论《{{ bodyData.title }}》</p>
 			<div class="publish-block">
 				<div class="publish-info">
 					<strong>发表评论</strong>
@@ -19,16 +19,20 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from "vue"
+import {defineComponent, onBeforeMount, Ref, ref} from "vue"
+import {RouteLocationNormalizedLoaded, useRoute} from "vue-router"
 import ArticleComponent from "../../components/Article/index.vue"
 import SelfInfoComponent from "../../components/SelfInfo/index.vue"
 import CommentFormComponent from "../../components/CommentForm/index.vue"
 import CommentItemComponent from "../../components/CommentItem/index.vue"
+import {getBody} from "../../axios"
 
 export default defineComponent({
 	name: "ArticleContentComponent",
 	components: {ArticleComponent, SelfInfoComponent, CommentFormComponent, CommentItemComponent},
 	setup() {
+		const route: RouteLocationNormalizedLoaded = useRoute()
+		const bodyData: Ref = ref({})
 		const data = ref({
 			id: 1,
 			name: "小懒",
@@ -60,7 +64,12 @@ export default defineComponent({
 			],
 		})
 
-		return {data}
+		onBeforeMount(() => {
+			getBody({id: Number(route.query.id)}).then((res) => {
+				bodyData.value = res.data
+			})
+		})
+		return {bodyData, data}
 	},
 })
 </script>

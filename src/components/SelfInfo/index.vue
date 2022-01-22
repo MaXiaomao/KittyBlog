@@ -1,10 +1,6 @@
 <template>
 	<div class="self-info">
-		<el-image
-			class="m-image"
-			src="https://www.xuanmo.xin/wp-content/uploads/2021/12/xuanmo_avatar.JPG"
-			fit="cover"
-		></el-image>
+		<el-image class="m-image" :src="Avatar" fit="cover"></el-image>
 		<div class="author">
 			<div class="text">
 				<div class="name">作者：马小茂</div>
@@ -54,13 +50,14 @@
 
 <script lang="ts">
 import {defineComponent} from "vue"
+import Avatar from "../../config/image/avatar.jpg"
 import QQImage from "../../config/image/QQ.jpg"
 import WeChatImage from "../../config/image/we-chat.jpg"
 
 export default defineComponent({
 	name: "SelfInfoComponent",
 	setup() {
-		return {QQImage, WeChatImage}
+		return {Avatar, QQImage, WeChatImage}
 	},
 })
 </script>

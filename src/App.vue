@@ -24,6 +24,6 @@ export default defineComponent({
 
 <style>
 .page-main {
-	min-height: calc(100vh - 288px);
+	min-height: calc(100vh - 206px);
 }
 </style>

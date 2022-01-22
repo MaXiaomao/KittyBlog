@@ -1,29 +1,40 @@
 <template>
 	<div class="page-main version-heart">
 		<div class="grid-left">
-			<title-bar-component name="web前端"></title-bar-component>
+			<title-bar-component :name="pageTitle"></title-bar-component>
 			<div class="article-list">
 				<article-item-component v-for="v in articleData" v-bind="v" :key="v.id" />
 			</div>
-			<el-pagination class="m-pagination" layout="prev, pager, next, jumper" :total="1000" :pager-count="5" />
+			<el-pagination
+				v-if="route.query.classify !== undefined"
+				class="m-pagination"
+				@current-change="pageChange"
+				:current-page="page"
+				:page-size="pageSize"
+				:total="articleTotal"
+				:pager-count="5"
+				layout="total, prev, pager, next, jumper"
+			/>
 		</div>
 		<div class="grid-right hidden-md-and-down">
 			<bulletin-component class="margin-bot" />
 			<comment-component class="margin-bot" />
 			<site-count-component class="margin-bot" />
-			<label-component class="margin-bot" />
+			<label-component />
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue"
+import {defineComponent, onBeforeMount, reactive, Ref, ref, toRefs, watch} from "vue"
+import {RouteLocationNormalizedLoaded, useRoute} from "vue-router"
 import TitleBarComponent from "../../components/TitleBar/index.vue"
 import ArticleItemComponent from "../../components/ArticleItem/index.vue"
 import BulletinComponent from "../../components/Bulletin/index.vue"
 import CommentComponent from "../../components/NewComment/index.vue"
 import SiteCountComponent from "../../components/SiteCount/index.vue"
 import LabelComponent from "../../components/Label/index.vue"
+import {getArticle, GetArticleRule} from "../../axios"
 
 export default defineComponent({
 	name: "ArticleListComponent",
@@ -35,7 +46,53 @@ export default defineComponent({
 		SiteCountComponent,
 		LabelComponent,
 	},
-	setup() {},
+	setup() {
+		const route: RouteLocationNormalizedLoaded = useRoute()
+		const pageTitle: Ref = ref(null)
+		const articleTotal: Ref = ref(0)
+		const articleData: Ref = ref([])
+		const articleParams: GetArticleRule = reactive({
+			classify: null,
+			title: null,
+			label: null,
+			page: 1,
+			pageSize: 10,
+		})
+
+		const paramsInit = () => {
+			if (route.query.classify === undefined) {
+				articleParams.classify = null
+				articleParams.label = Number(route.query.label)
+			} else {
+				articleParams.label = null
+				articleParams.classify = Number(route.query.classify)
+			}
+		}
+		const articleGet = () => {
+			getArticle(articleParams).then((res) => {
+				articleTotal.value = res.data.total
+				articleData.value = res.data.data
+			})
+		}
+		const pageChange = (page: number) => {
+			articleParams.page = page
+			articleGet()
+		}
+
+		watch(route, (newValue) => {
+			if (newValue.path === "/ArticleList") {
+				paramsInit()
+				articleGet()
+				pageTitle.value = newValue.query.name
+			}
+		})
+		onBeforeMount(() => {
+			paramsInit()
+			articleGet()
+			pageTitle.value = route.query.name
+		})
+		return {route, pageTitle, articleTotal, articleData, ...toRefs(articleParams), pageChange}
+	},
 })
 </script>
 

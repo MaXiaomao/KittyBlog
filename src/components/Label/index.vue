@@ -4,194 +4,58 @@
 			<template #icon>
 				<el-icon><collection-tag /></el-icon>
 			</template>
-			<template #right>更多</template>
+			<template #right>
+				<router-link to="/LabelAll">更多</router-link>
+			</template>
 		</title-bar-component>
 		<div class="content">
 			<el-tag
+				v-for="v in labelData"
 				class="m-tag"
-				@click="tagClick('前端')"
+				@click="tagClick(v.id, v.name)"
 				:type="tagType[randomNumber(0, 4)]"
 				effect="dark"
 				size="medium"
+				:key="v.id"
 			>
-				前端笔记
+				{{ v.name }}
 			</el-tag>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-			>
-				JavaScript
-			</el-tag>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-				>demo</el-tag
-			>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-				>Vue</el-tag
-			>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-				>tips</el-tag
-			>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-				>css</el-tag
-			>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-				>css3</el-tag
-			>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-			>
-				WordPress
-			</el-tag>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-			>
-				html
-			</el-tag>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-				>canvas</el-tag
-			>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-				>wordpress主题</el-tag
-			>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-				>bootstrap</el-tag
-			>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-				>SASS</el-tag
-			>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-				>微信小程序</el-tag
-			>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-				>nuxtjs</el-tag
-			>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-				>html5</el-tag
-			>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-				>软件分享</el-tag
-			>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-				>手机摄影</el-tag
-			>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-				>xuanmo</el-tag
-			>
-			<el-tag
-				class="m-tag"
-				@click="tagClick('前端')"
-				:type="tagType[randomNumber(0, 4)]"
-				effect="dark"
-				size="medium"
-				>iconfont</el-tag
-			>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue"
+import {defineComponent, ref, onBeforeMount} from "vue"
+import {Router, useRouter} from "vue-router"
 import {CollectionTag} from "@element-plus/icons-vue"
 import TitleBarComponent from "../TitleBar/index.vue"
-import {randomNumber} from "../../config/plugIn/index.ts"
+import {randomNumber} from "../../config/plugIn"
+import {getLabel} from "../../axios"
 
 export default defineComponent({
 	name: "LabelComponent",
 	components: {TitleBarComponent, CollectionTag},
 	setup() {
+		const router: Router = useRouter()
 		const tagType: string[] = ["success", "info", "warning", "danger"]
+		const labelData = ref([])
 
-		const tagClick = (value: string) => {
-			console.log(value)
+		const tagClick = (id: number, name: string) => {
+			router.push({
+				path: "/ArticleList",
+				query: {
+					label: id,
+					name,
+				},
+			})
 		}
 
-		return {tagType, randomNumber, tagClick}
+		onBeforeMount(() => {
+			getLabel({size: 10}).then((res) => {
+				labelData.value = res.data.data
+			})
+		})
+		return {router, tagType, labelData, randomNumber, tagClick}
 	},
 })
 </script>

@@ -20,6 +20,8 @@
   "rules": {
     "func-names": 0,
     "no-console": "off",
-    "vue/no-multiple-template-root": "off"
+    "vue/no-multiple-template-root": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off"
   }
 }

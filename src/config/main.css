@@ -18,6 +18,10 @@ body {
     background-color: #F8F8F8;
 }
 
+a{
+    text-decoration: none;
+}
+
 .version-heart {
     width: 1200px;
     margin: 0 auto;

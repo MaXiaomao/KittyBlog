@@ -11,20 +11,28 @@
 				<div class="article-list">
 					<article-item-component v-for="v in articleData" v-bind="v" :key="v.id" />
 				</div>
-				<el-pagination class="m-pagination" layout="prev, pager, next, jumper" :total="1000" :pager-count="5" />
+				<el-pagination
+					class="m-pagination"
+					@current-change="pageChange"
+					:current-page="page"
+					:page-size="pageSize"
+					:total="articleTotal"
+					:pager-count="5"
+					layout="total, prev, pager, next, jumper"
+				/>
 			</div>
 		</div>
 		<div class="grid-right hidden-md-and-down">
 			<bulletin-component class="margin-bot" />
 			<comment-component class="margin-bot" />
 			<site-count-component class="margin-bot" />
-			<label-component class="margin-bot" />
+			<label-component />
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from "vue"
+import {defineComponent, onBeforeMount, ref, reactive, toRefs, Ref} from "vue"
 import {Notebook} from "@element-plus/icons-vue"
 import BannerComponent from "../../components/Banner/index.vue"
 import TitleComponent from "../../components/TitleBar/index.vue"
@@ -33,6 +41,7 @@ import BulletinComponent from "../../components/Bulletin/index.vue"
 import CommentComponent from "../../components/NewComment/index.vue"
 import SiteCountComponent from "../../components/SiteCount/index.vue"
 import LabelComponent from "../../components/Label/index.vue"
+import {getArticle, GetArticleRule} from "../../axios"
 
 export default defineComponent({
 	name: "HomeComponent",
@@ -47,19 +56,25 @@ export default defineComponent({
 		LabelComponent,
 	},
 	setup() {
-		const articleData = ref([
-			{
-				id: 1,
-				classify: "web前端",
-				time: "2021-12-20 18:00:00",
-				thumbnail: "",
-				title: "Linux 开机自动执行自定义脚本",
-				describe:
-					"场景 在使用frp做内网穿透的时候，写了后台运行脚本文件，默认不会开机自动执行，这时候需要借助 Linux 开机自动执行来完成。 步骤 第一步进入目录/etc/rc.d/init.d，创建一个需要开机启动的脚本文件，我这里以 frp 启动脚本为例，文件名为 frp.sh #!/bin/sh #add for chkco",
-			},
-		])
+		const articleTotal: Ref = ref(0)
+		const articleData: Ref = ref([])
+		const articleParams: GetArticleRule = reactive({classify: null, title: null, page: 1, pageSize: 10})
 
-		return {articleData}
+		const articleGet = () => {
+			getArticle(articleParams).then((res) => {
+				articleTotal.value = res.data.total
+				articleData.value = res.data.data
+			})
+		}
+		const pageChange = (page: number) => {
+			articleParams.page = page
+			articleGet()
+		}
+
+		onBeforeMount(() => {
+			articleGet()
+		})
+		return {articleData, articleTotal, ...toRefs(articleParams), pageChange}
 	},
 })
 </script>

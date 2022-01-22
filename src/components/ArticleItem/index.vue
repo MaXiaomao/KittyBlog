@@ -3,7 +3,8 @@
 		<div class="item-image">
 			<el-image
 				class="m-image"
-				src="https://www.xuanmo.xin/wp-content/uploads/2021/11/11421637507239_.pic_.jpg"
+				v-if="img_url !== null"
+				:src="`http://127.0.0.1:8080/${img_url}`"
 				fit="cover"
 			></el-image>
 		</div>
@@ -11,21 +12,18 @@
 			<div class="item-top">
 				<span>{{ classify }}<i></i></span>{{ title }}
 			</div>
-			<div class="item-center">
-				场景 在使用frp做内网穿透的时候，写了后台运行脚本文件，默认不会开机自动执行，这时候需要借助 Linux
-				开机自动执行来完成。 步骤 第一步进入目录/etc/rc.d/init.d，创建一个需要开机启动的脚本文件，我这里以 frp
-				启动脚本为例，文件名为 frp.sh #!/bin/sh #add for chkco
-			</div>
+			<div class="item-center">{{ describe }}</div>
 			<div class="item-bottom">
 				<div class="bottom-text">
 					<div>
-						<el-icon><calendar /></el-icon><span>2021-03-03 00:24:37</span>
+						<el-icon><calendar /></el-icon>
+						<span>{{ dayjs.utc(date_time).local().format("YYYY-MM-DD HH:mm:ss") }}</span>
 					</div>
 					<div>
-						<el-icon><magic-stick /></el-icon><span>2024</span>
+						<el-icon><magic-stick /></el-icon><span>{{ like }}</span>
 					</div>
 					<div>
-						<el-icon><chat-dot-square /></el-icon><span>18</span>
+						<el-icon><chat-dot-square /></el-icon><span>0</span>
 					</div>
 				</div>
 				<el-button @click="articleContent(id)" size="mini" type="primary">阅读详情</el-button>
@@ -35,19 +33,31 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue"
+import {defineComponent, onBeforeMount} from "vue"
+import {Router, useRouter} from "vue-router"
+import dayjs from "dayjs"
+import utc from "dayjs/plugin/utc"
 import {Calendar, MagicStick, ChatDotSquare} from "@element-plus/icons-vue"
 
 export default defineComponent({
 	name: "ArticleItemComponent",
 	components: {Calendar, MagicStick, ChatDotSquare},
-	props: ["id", "title", "classify"],
+	props: ["img_url", "id", "title", "classify", "describe", "date_time", "like"],
 	setup() {
+		const router: Router = useRouter()
+
 		const articleContent = (id: number) => {
 			console.log(id)
+			router.push({
+				path: "/ArticleContent",
+				query: {id},
+			})
 		}
 
-		return {articleContent}
+		onBeforeMount(() => {
+			dayjs.extend(utc)
+		})
+		return {dayjs, articleContent}
 	},
 })
 </script>
@@ -95,6 +105,7 @@ export default defineComponent({
 	transform: scale(1.2);
 }
 .item-info {
+	flex-grow: 2;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;

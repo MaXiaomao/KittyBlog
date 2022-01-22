@@ -1,69 +1,57 @@
 <template>
 	<div class="article">
 		<div class="title">
-			<h2>在Nuxtjs中使用@nuxtjs/axios与vuex的一些心得</h2>
+			<h2>{{ title }}</h2>
 			<div class="info">
 				<p>
 					<el-icon><user /></el-icon>马小茂
 				</p>
 				<p>
-					<el-icon><magic-stick /></el-icon>8897
+					<el-icon><magic-stick /></el-icon>{{ like }}
 				</p>
 				<p>
-					<el-icon><chat-dot-square /></el-icon>123
+					<el-icon><chat-dot-square /></el-icon>0
 				</p>
 				<p>
-					<el-icon><calendar /></el-icon>2020-11-29 18:00:00
+					<el-icon><calendar /></el-icon>{{ dayjs.utc(date_time).local().format("YYYY-MM-DD HH:mm:ss") }}
 				</p>
 			</div>
 		</div>
-		<div class="content" v-html="markedLinkPrism(html)"></div>
+		<markdown-component v-if="body" :body="body"></markdown-component>
 	</div>
 	<div class="active-oper">
 		<div class="label-bar">
 			<el-icon class="m-icon" color="#303133"><collection-tag /></el-icon>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" size="medium">手机摄影</el-tag>
-			<el-tag class="m-tag" :type="tagType[randomNumber(0, 4)]" size="medium">xuanmo</el-tag>
+			<el-tag class="m-tag" v-for="v in label" :type="tagType[randomNumber(0, 4)]" size="medium" :key="v.id">
+				{{ v.name }}
+			</el-tag>
 		</div>
-		<div class="context">
-			<p>上一篇：<span>Vue项目中遇见的一些问题</span></p>
-			<p>下一篇：<span>Vue项目中遇见的一些问题</span></p>
-		</div>
+		<!--<div class="context">-->
+		<!--<p>上一篇：<span>Vue项目中遇见的一些问题</span></p>-->
+		<!--<p>下一篇：<span>Vue项目中遇见的一些问题</span></p>-->
+		<!--/div>-->
 	</div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue"
+import {defineComponent, onBeforeMount} from "vue"
+import dayjs from "dayjs"
+import utc from "dayjs/plugin/utc"
 import {User, MagicStick, ChatDotSquare, Calendar, CollectionTag} from "@element-plus/icons-vue"
-import {randomNumber, markedLinkPrism} from "../../config/plugIn/index.ts"
+import MarkdownComponent from "../Markdown/index.vue"
+import {randomNumber} from "../../config/plugIn"
 
-// Line Numbers
 export default defineComponent({
 	name: "ArticleComponent",
-	components: {User, MagicStick, ChatDotSquare, Calendar, CollectionTag},
+	components: {User, MagicStick, ChatDotSquare, Calendar, CollectionTag, MarkdownComponent},
+	props: ["title", "like", "date_time", "body", "label", "id", "classify", "state", "describe", "img_url", "scan"],
 	setup() {
 		const tagType: string[] = ["success", "info", "warning", "danger"]
-		const html = `React + marked + prism.js
 
-**Code Sample:**
-\`\`\`js
-import marked from "marked";
-import prismjs from "prismjs";
-
-marked.setOptions({
-  renderer,
-  highlight: function(code, lang) {
-    try {
-      return prismjs.highlight(code, prismjs.languages[lang], lang);
-    } catch {
-      return code;
-    }
-  }
-});
-\`\`\`
-`
-
-		return {tagType, html, randomNumber, markedLinkPrism}
+		onBeforeMount(() => {
+			dayjs.extend(utc)
+		})
+		return {dayjs, tagType, randomNumber}
 	},
 })
 </script>
@@ -103,11 +91,9 @@ marked.setOptions({
 	margin-right: 3px;
 	vertical-align: middle;
 }
-.active-oper {
-}
 .label-bar {
 	display: flex;
-	padding: 15px 0;
+	/*padding: 15px 0;*/
 	align-items: center;
 	justify-content: center;
 }
@@ -128,9 +114,5 @@ marked.setOptions({
 .context span:hover {
 	color: #409eff;
 	cursor: pointer;
-}
-/deep/ pre[class*="language-"] > code {
-	border: none;
-	border-radius: 4px;
 }
 </style>
