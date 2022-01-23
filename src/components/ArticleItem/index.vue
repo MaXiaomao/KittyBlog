@@ -5,7 +5,7 @@
 		</div>
 		<div class="item-info">
 			<div class="item-top">
-				<span>{{ classify }}<i></i></span>{{ title }}
+				<span>{{ classifyName }}<i></i></span>{{ title }}
 			</div>
 			<div class="item-center">{{ describe }}</div>
 			<div class="item-bottom">
@@ -37,12 +37,11 @@ import {Calendar, MagicStick, ChatDotSquare} from "@element-plus/icons-vue"
 export default defineComponent({
 	name: "ArticleItemComponent",
 	components: {Calendar, MagicStick, ChatDotSquare},
-	props: ["img_url", "id", "title", "classify", "describe", "date_time", "like"],
+	props: ["img_url", "id", "title", "classify", "classifyName", "describe", "date_time", "like"],
 	setup() {
 		const router: Router = useRouter()
 
 		const articleContent = (id: number) => {
-			console.log(id)
 			router.push({
 				path: "/ArticleContent",
 				query: {id},
