@@ -12,7 +12,7 @@
 				<a href="" target="_blank">冯奎博客</a>
 			</div>
 			<div class="page-nav">
-				<em @click="menuRouter('/', '首页', null)">首页</em>
+				<em @click="menuRouter('/', '首页')">首页</em>
 				<em
 					@click="menuRouter('/ArticleList', v.name, {classify: v.id, name: v.name})"
 					v-for="v in menuData"
@@ -40,7 +40,7 @@
 
 <script lang="ts">
 import {defineComponent, onBeforeMount, onBeforeUnmount, Ref, ref} from "vue"
-import {Router, useRouter} from "vue-router"
+import {Router, useRouter, LocationQueryRaw} from "vue-router"
 import PubSub from "pubsub-js"
 import {Promotion} from "@element-plus/icons-vue"
 
@@ -51,7 +51,7 @@ export default defineComponent({
 		const router: Router = useRouter()
 		const menuData: Ref = ref([])
 
-		const menuRouter = (path: string, name: string, query = null) => {
+		const menuRouter = (path: string, name: string, query: LocationQueryRaw | undefined) => {
 			PubSub.publish("activeIndex", name)
 			router.push({
 				path,
