@@ -18,6 +18,7 @@
 					:page-size="pageSize"
 					:total="articleTotal"
 					:pager-count="5"
+					hide-on-single-page
 					layout="total, prev, pager, next, jumper"
 				/>
 			</div>
@@ -63,7 +64,7 @@ export default defineComponent({
 			title: null,
 			label: null,
 			page: 1,
-			pageSize: 10,
+			pageSize: 7,
 		})
 
 		const articleGet = () => {

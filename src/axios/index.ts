@@ -32,3 +32,8 @@ export interface GetBodyRule {
 export const getBody = (params: GetBodyRule) => {
 	return AxiosDoll("get", "/api/body", {params})
 }
+
+// 站点统计信息
+export const getSiteCount = (params = null) => {
+	return AxiosDoll("get", "/api/siteCount", {params})
+}

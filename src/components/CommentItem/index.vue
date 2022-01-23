@@ -53,7 +53,6 @@ export default defineComponent({
 		onBeforeUnmount(() => {
 			PubSub.unsubscribe("commentFormShowId")
 		})
-
 		return {commentFormShowId, replyBtn, replyDelete}
 	},
 })

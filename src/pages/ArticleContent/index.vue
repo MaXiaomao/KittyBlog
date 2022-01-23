@@ -2,7 +2,7 @@
 	<div class="page-main version-heart">
 		<article-component v-bind="bodyData" />
 		<self-info-component class="margin-bot" />
-		<div class="comment">
+		<div class="comment" v-if="false">
 			<p class="title">共 0 条评论《{{ bodyData.title }}》</p>
 			<div class="publish-block">
 				<div class="publish-info">

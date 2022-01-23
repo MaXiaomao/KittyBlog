@@ -12,19 +12,14 @@
 				<a href="" target="_blank">冯奎博客</a>
 			</div>
 			<div class="page-nav">
-				<em>首页</em>
-				<i>|</i>
-				<em>web前端</em>
-				<i>|</i>
-				<em>后端</em>
-				<i>|</i>
-				<em>服务器</em>
-				<i>|</i>
-				<em>实战案例</em>
-				<i>|</i>
+				<em @click="menuRouter('/', '首页', null)">首页</em>
+				<em
+					@click="menuRouter('/ArticleList', v.name, {classify: v.id, name: v.name})"
+					v-for="v in menuData"
+					:key="v.id"
+					>{{ v.name }}</em
+				>
 				<em>关于博主</em>
-				<i>|</i>
-				<em>生活随笔</em>
 			</div>
 			<div class="site-info">
 				<p>
@@ -32,7 +27,9 @@
 						>京ICP备12345678号-2</a
 					>
 				</p>
-				<p class="hidden-md-and-down">Theme by <a href="" target="_blank">Xiaomao</a></p>
+				<p class="hidden-md-and-down">
+					Source code&emsp;<a href="https://github.com/MaXiaomao/KittyBlog" target="_blank">GitHub</a>
+				</p>
 			</div>
 		</div>
 	</footer>
@@ -42,13 +39,36 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue"
+import {defineComponent, onBeforeMount, onBeforeUnmount, Ref, ref} from "vue"
+import {Router, useRouter} from "vue-router"
+import PubSub from "pubsub-js"
 import {Promotion} from "@element-plus/icons-vue"
 
 export default defineComponent({
 	name: "FooterComponent",
 	components: {Promotion},
-	setup() {},
+	setup() {
+		const router: Router = useRouter()
+		const menuData: Ref = ref([])
+
+		const menuRouter = (path: string, name: string, query = null) => {
+			PubSub.publish("activeIndex", name)
+			router.push({
+				path,
+				query,
+			})
+		}
+
+		onBeforeMount(() => {
+			PubSub.subscribe("menuData", (msg: string, value: any) => {
+				menuData.value = value
+			})
+		})
+		onBeforeUnmount(() => {
+			PubSub.unsubscribe("menuData")
+		})
+		return {menuData, menuRouter}
+	},
 })
 </script>
 
@@ -73,11 +93,19 @@ footer {
 .page-nav {
 	color: #c0c4cc;
 	font-size: 14px;
+	overflow: hidden;
 	margin-bottom: 15px;
 }
 .page-nav em {
+	float: left;
 	cursor: pointer;
+	padding: 0 20px;
+	line-height: 16px;
 	font-style: normal;
+	border-right: solid 1px #c0c4cc;
+}
+.page-nav em:last-child {
+	border-right: none;
 }
 .page-nav em:hover {
 	color: #409eff;
