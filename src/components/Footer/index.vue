@@ -12,7 +12,7 @@
 				<a href="" target="_blank">冯奎博客</a>
 			</div>
 			<div class="page-nav">
-				<em @click="menuRouter('/', '首页')">首页</em>
+				<em @click="menuRouter('/', '首页', undefined)">首页</em>
 				<em
 					@click="menuRouter('/ArticleList', v.name, {classify: v.id, name: v.name})"
 					v-for="v in menuData"
