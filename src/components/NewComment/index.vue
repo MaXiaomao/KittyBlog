@@ -8,7 +8,7 @@
 		<div class="content">
 			<div class="comment-item">
 				<div class="item-title">
-					<el-avatar src="" fit="cover" :size="50"></el-avatar>
+					<el-avatar class="m-avatar" :size="50">D</el-avatar>
 					<div class="title-info">
 						<strong>dylan</strong>
 						<p>评：写给2021年以及未来的我</p>
@@ -20,7 +20,7 @@
 			</div>
 			<div class="comment-item">
 				<div class="item-title">
-					<el-avatar src="" fit="cover" :size="50"></el-avatar>
+					<el-avatar class="m-avatar" :size="50">D</el-avatar>
 					<div class="title-info">
 						<strong>dylan</strong>
 						<p>评：写给2021年以及未来的我</p>
@@ -62,6 +62,10 @@ export default defineComponent({
 	display: flex;
 	align-items: stretch;
 	justify-content: space-between;
+}
+.item-title .m-avatar {
+	font-size: 22px;
+	font-weight: bold;
 }
 .title-info {
 	flex-grow: 1;
