@@ -8,11 +8,7 @@
 		<div class="content">
 			<div class="comment-item">
 				<div class="item-title">
-					<el-avatar
-						src="https://avatar.xuanmo.xin/avatar/1e0d69e108da16e73f8227bd973231f4?s=200"
-						fit="cover"
-						:size="50"
-					></el-avatar>
+					<el-avatar src="" fit="cover" :size="50"></el-avatar>
 					<div class="title-info">
 						<strong>dylan</strong>
 						<p>评：写给2021年以及未来的我</p>
@@ -24,11 +20,7 @@
 			</div>
 			<div class="comment-item">
 				<div class="item-title">
-					<el-avatar
-						src="https://avatar.xuanmo.xin/avatar/1e0d69e108da16e73f8227bd973231f4?s=200"
-						fit="cover"
-						:size="50"
-					></el-avatar>
+					<el-avatar src="" fit="cover" :size="50"></el-avatar>
 					<div class="title-info">
 						<strong>dylan</strong>
 						<p>评：写给2021年以及未来的我</p>
