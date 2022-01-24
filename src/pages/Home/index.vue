@@ -25,7 +25,7 @@
 		</div>
 		<div class="grid-right hidden-md-and-down">
 			<bulletin-component class="margin-bot" />
-			<comment-component class="margin-bot" />
+			<new-comment-component class="margin-bot" />
 			<site-count-component class="margin-bot" />
 			<label-component />
 		</div>
@@ -39,7 +39,7 @@ import BannerComponent from "../../components/Banner/index.vue"
 import TitleComponent from "../../components/TitleBar/index.vue"
 import ArticleItemComponent from "../../components/ArticleItem/index.vue"
 import BulletinComponent from "../../components/Bulletin/index.vue"
-import CommentComponent from "../../components/NewComment/index.vue"
+import NewCommentComponent from "../../components/NewComment/index.vue"
 import SiteCountComponent from "../../components/SiteCount/index.vue"
 import LabelComponent from "../../components/Label/index.vue"
 import {getArticle, GetArticleRule} from "../../axios"
@@ -52,7 +52,7 @@ export default defineComponent({
 		TitleComponent,
 		ArticleItemComponent,
 		BulletinComponent,
-		CommentComponent,
+		NewCommentComponent,
 		SiteCountComponent,
 		LabelComponent,
 	},
