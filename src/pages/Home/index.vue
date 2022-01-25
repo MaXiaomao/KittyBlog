@@ -63,6 +63,7 @@ export default defineComponent({
 			classify: null,
 			title: null,
 			label: null,
+			state: null,
 			page: 1,
 			pageSize: 7,
 		})
