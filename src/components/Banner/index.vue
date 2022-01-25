@@ -1,6 +1,11 @@
 <template>
 	<div class="banner">
-		<div v-for="(v, i) in bannerData" :class="i === 0 ? 'banner-main banner-item' : 'banner-item'" :key="v.id">
+		<div
+			v-for="(v, i) in bannerData"
+			@click="articleRouter(v.id)"
+			:class="i === 0 ? 'banner-main banner-item' : 'banner-item'"
+			:key="v.id"
+		>
 			<el-image :src="`/upload${v.img_url}`" style="width: 100%; height: 100%" fit="cover"></el-image>
 			<p>{{ v.title }}</p>
 		</div>
@@ -9,12 +14,21 @@
 
 <script lang="ts">
 import {defineComponent, onBeforeMount, Ref, ref} from "vue"
+import {useRouter, Router} from "vue-router"
 import {getArticle} from "../../axios"
 
 export default defineComponent({
 	name: "BannerComponent",
 	setup() {
+		const router: Router = useRouter()
 		const bannerData: Ref = ref([])
+
+		const articleRouter = (id: number) => {
+			router.push({
+				path: "/ArticleContent",
+				query: {id},
+			})
+		}
 
 		onBeforeMount(() => {
 			const params = {classify: null, title: null, label: null, state: 3, page: 1, pageSize: 4}
@@ -22,7 +36,7 @@ export default defineComponent({
 				bannerData.value = res.data.data
 			})
 		})
-		return {bannerData}
+		return {bannerData, articleRouter}
 	},
 })
 </script>
