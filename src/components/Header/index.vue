@@ -62,6 +62,7 @@
 
 <script lang="ts">
 import {defineComponent, onBeforeMount, onBeforeUnmount, Ref, ref} from "vue"
+import {Router, useRouter} from "vue-router"
 import PubSub from "pubsub-js"
 import {Search, Expand} from "@element-plus/icons-vue"
 import Logon from "../../config/image/logo.png"
@@ -71,6 +72,7 @@ export default defineComponent({
 	name: "HeaderComponent",
 	components: {Expand},
 	setup() {
+		const router: Router = useRouter()
 		const activeIndex: Ref = ref("首页")
 		const searchData: Ref = ref("")
 		const drawerState: Ref = ref(false)
@@ -81,7 +83,10 @@ export default defineComponent({
 			if (drawerState.value) drawerState.value = false
 		}
 		const searchBtn = (value: string) => {
-			console.log(value)
+			router.push({
+				path: "/ArticleList",
+				query: {title: value, name: value},
+			})
 		}
 
 		onBeforeMount(() => {

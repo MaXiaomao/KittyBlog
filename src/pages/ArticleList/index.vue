@@ -56,17 +56,24 @@ export default defineComponent({
 			classify: null,
 			title: null,
 			label: null,
+			state: null,
 			page: 1,
 			pageSize: 7,
 		})
 
 		const paramsInit = () => {
-			if (route.query.classify === undefined) {
+			if (route.query.classify !== undefined) {
+				articleParams.label = null
+				articleParams.title = null
+				articleParams.classify = Number(route.query.classify)
+			} else if (route.query.label !== undefined) {
+				articleParams.title = null
 				articleParams.classify = null
 				articleParams.label = Number(route.query.label)
 			} else {
 				articleParams.label = null
-				articleParams.classify = Number(route.query.classify)
+				articleParams.classify = null
+				articleParams.title = route.query.title as string
 			}
 		}
 		const articleGet = () => {

@@ -18,6 +18,7 @@ export interface GetArticleRule {
 	classify: number | null
 	title: string | null
 	label: number | null
+	state: number | null
 	page: number
 	pageSize: number
 }

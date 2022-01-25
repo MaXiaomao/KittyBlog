@@ -7,5 +7,6 @@ declare module "*.vue" {
 	export default component
 }
 
+declare module "markdown-it"
 declare module "prismjs"
 declare module "pubsub-js"

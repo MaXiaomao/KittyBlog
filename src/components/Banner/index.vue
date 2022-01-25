@@ -1,30 +1,29 @@
 <template>
 	<div class="banner">
-		<!--		<div class="banner-main banner-item">-->
-		<!--			<el-image src="" style="width: 100%; height: 100%" fit="cover"></el-image>-->
-		<!--			<p>原创 Nuxtjs + WordPress 主题，前后端分离，欢迎体验</p>-->
-		<!--		</div>-->
-		<!--		<div class="banner-item">-->
-		<!--			<el-image src="" style="width: 100%; height: 100%" fit="cover"></el-image>-->
-		<!--			<p>我的 form 动态表单组件</p>-->
-		<!--		</div>-->
-		<!--		<div class="banner-item">-->
-		<!--			<el-image src="" style="width: 100%; height: 100%" fit="cover"></el-image>-->
-		<!--			<p>垃圾分类小妙招-我的小程序</p>-->
-		<!--		</div>-->
-		<!--		<div class="banner-item">-->
-		<!--			<el-image src="" style="width: 100%; height: 100%" fit="cover"></el-image>-->
-		<!--			<p>博客小程序版正式发布</p>-->
-		<!--		</div>-->
+		<div v-for="(v, i) in bannerData" :class="i === 0 ? 'banner-main banner-item' : 'banner-item'" :key="v.id">
+			<el-image :src="`/upload${v.img_url}`" style="width: 100%; height: 100%" fit="cover"></el-image>
+			<p>{{ v.title }}</p>
+		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue"
+import {defineComponent, onBeforeMount, Ref, ref} from "vue"
+import {getArticle} from "../../axios"
 
 export default defineComponent({
 	name: "BannerComponent",
-	setup() {},
+	setup() {
+		const bannerData: Ref = ref([])
+
+		onBeforeMount(() => {
+			const params = {classify: null, title: null, label: null, state: 3, page: 1, pageSize: 4}
+			getArticle(params).then((res) => {
+				bannerData.value = res.data.data
+			})
+		})
+		return {bannerData}
+	},
 })
 </script>
 
