@@ -23,9 +23,8 @@
 			</div>
 			<div class="site-info">
 				<p>
-					Copyright © Xiaomao Blog All Rights Reserved. 2021-2026&emsp;<a href="" target="_blank"
-						>京ICP备12345678号-2</a
-					>
+					Copyright © Xiaomao Blog All Rights Reserved. 2021-2026&emsp;
+					<a href="https://beian.miit.gov.cn/" target="_blank">冀ICP备2022001949号-1</a>
 				</p>
 				<p class="hidden-md-and-down">
 					Source code&emsp;<a href="https://github.com/MaXiaomao/KittyBlog" target="_blank">GitHub</a>
