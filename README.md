@@ -6,7 +6,7 @@
 
 ### 技术栈
 
--   [vite](https://github.com/vitejs/vite/) + [vue](https://github.com/vuejs/core/) + [element-plus](https://github.com/element-plus/element-plus/) + [axios](https://github.com/axios/axios/) + [axios](https://github.com/axios/axios/) + [pubsub-js](https://github.com/mroderick/PubSubJS/) + [dayjs](https://github.com/iamkun/dayjs/) + [markdown-it](https://github.com/markdown-it/markdown-it/) + [prismjs](https://github.com/PrismJS/prism/)
+-   [vite](https://github.com/vitejs/vite/){:target="_blank"} + [vue](https://github.com/vuejs/core/) + [element-plus](https://github.com/element-plus/element-plus/) + [axios](https://github.com/axios/axios/) + [axios](https://github.com/axios/axios/) + [pubsub-js](https://github.com/mroderick/PubSubJS/) + [dayjs](https://github.com/iamkun/dayjs/) + [markdown-it](https://github.com/markdown-it/markdown-it/) + [prismjs](https://github.com/PrismJS/prism/)
 
 ### 更新计划
 
