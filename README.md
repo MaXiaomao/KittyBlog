@@ -25,5 +25,9 @@ $ yarn dev
 $ yarn build
 ```
 
+### 相关项目
+- [KittyAdmin](https://github.com/MaXiaomao/KittyAdmin/)
+- [KittyServer](https://github.com/MaXiaomao/KittyServer/)
+
 ### 参考资源
 - [轩陌博客](https://www.xuanmo.xin/)
