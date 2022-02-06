@@ -14,7 +14,7 @@
 
 ### 构建项目
 
-``` bash
+```bash
 # Install dependencies
 $ yarn
 
