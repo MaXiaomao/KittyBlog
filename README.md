@@ -15,13 +15,13 @@
 ### 构建项目
 
 ```bash
-# Install dependencies
+# install dependencies
 $ yarn
 
-# Start the service at localhost:3000
+# serve with hot reload at localhost:3000
 $ yarn dev
 
-# Package the project
+# build for production with minification
 $ yarn build
 ```
 
