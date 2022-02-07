@@ -7,10 +7,9 @@
 		</title-bar-component>
 		<div class="content">
 			<p>
-				喜欢这款主题的朋友可以按教程折腾。 本站采用Nuxtjs+WordPress REST
-				API渲染页面，源码存放在Github，欢迎使用。 微信小程序版已上线，欢迎体验。
+				本站采用前后端分离架构（未考虑SEO），前端使用Vue3开发后端采用Egg开发，项目还有许多不完善之处，源码存放在Github，欢迎多多指正。
 			</p>
-			<a href="">
+			<a href="https://github.com/MaXiaomao/KittyBlog/" target="_blank">
 				<el-image src="https://img.shields.io/github/stars/MaXiaomao/KittyBlog?style=social"></el-image>
 			</a>
 		</div>
