@@ -5,7 +5,7 @@
 				<el-icon><collection-tag /></el-icon>
 			</template>
 			<template #right>
-				<router-link to="/LabelAll">更多</router-link>
+				<router-link class="more-btn" to="/LabelAll">更多</router-link>
 			</template>
 		</title-bar-component>
 		<div class="content">
@@ -68,6 +68,10 @@ export default defineComponent({
 }
 .content {
 	margin-right: -5px;
+}
+
+.more-btn {
+	color: #606266;
 }
 .m-tag {
 	cursor: pointer;
