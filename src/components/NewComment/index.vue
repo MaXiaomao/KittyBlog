@@ -1,5 +1,5 @@
 <template>
-	<div class="new-comment">
+	<div class="new-comment" v-if="false">
 		<title-bar-component name="最新评论">
 			<template #icon>
 				<el-icon><chat-line-square /></el-icon>
